@@ -1,4 +1,13 @@
 #!/bin/bash
+
+# Do not allow to commit on master
+git_branch=$(git rev-parse --abbrev-ref HEAD)
+if [[ $git_branch = 'master' ]]
+then
+	echo "Commit on master is not allowed!!!"
+	exit 3
+fi
+
 files_changed=$(git diff --name-only)
 file_count=0
 
