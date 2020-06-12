@@ -1,0 +1,18 @@
+#!/bin/bash
+files_changed=$(git diff --name-only)
+
+for file_changed in $files_changed
+do
+	git add "$file_changed"
+done
+
+if [ -n "$1" ]
+then
+	git commit -m "$1"
+	echo "normal commit"
+else
+	git commit --fixup=HEAD -m 'fixup'
+	echo "fixup commited"
+fi
+
+
